@@ -45,6 +45,8 @@ int wi_cipher_dummy = 1;
 #else
 #define WI_CIPHER_OPENSSL				1
 #endif
+// Force OpenSSL cipher
+//#define WI_CIPHER_OPENSSL				1
 
 #ifdef HAVE_OPENSSL_SHA_H
 #include <openssl/evp.h>
@@ -172,7 +174,7 @@ static wi_cipher_t * _wi_cipher_init_with_key(wi_cipher_t *cipher, wi_data_t *ke
 	cipher->key			= wi_retain(key);
 	cipher->iv			= wi_retain(iv);
 	
-#ifdef WI_CIPHER_OPENSSL
+#ifdef WI_CIPHER_OPENSSL    
 	if(EVP_EncryptInit(&cipher->encrypt_ctx, cipher->cipher, NULL, NULL) != 1) {
 		wi_error_set_openssl_error();
 		
