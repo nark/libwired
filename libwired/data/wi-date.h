@@ -62,6 +62,7 @@ WI_EXPORT wi_date_t *					wi_date_init_with_string(wi_date_t *, wi_string_t *, w
 WI_EXPORT wi_date_t *					wi_date_init_with_rfc3339_string(wi_date_t *, wi_string_t *);
 
 WI_EXPORT wi_integer_t					wi_date_compare(wi_runtime_instance_t *, wi_runtime_instance_t *);
+WI_EXPORT wi_boolean_t                  wi_date_valid_expiration_date(wi_date_t *);
 
 WI_EXPORT wi_time_interval_t			wi_date_time_interval(wi_date_t *);
 

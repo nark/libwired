@@ -387,6 +387,16 @@ wi_integer_t wi_date_compare(wi_runtime_instance_t *instance1, wi_runtime_instan
 	return 0;
 }
 
+wi_boolean_t wi_date_valid_expiration_date(wi_date_t *date) {
+    wi_time_interval_t  interval;
+    wi_date_t           *now = wi_date();
+    
+    if(!date)
+        return false;
+    
+    interval = wi_date_time_interval_since_date(now, date);
+    return (interval > 0) ? true : false;
+}
 
 
 #pragma mark -
