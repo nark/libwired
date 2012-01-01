@@ -12,6 +12,8 @@ DerivedData/*
 profile
 
 # project related
+doc/*
+p7/wired.html
 obj/*
 run/libwired/*
 *.o

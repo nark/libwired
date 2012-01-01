@@ -26,6 +26,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file wired.h 
+ * @brief This header file include every public headers of the library
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *
+ * libwired was created and is mainly intended for use by the Wired network suite. 
+ * It contains collections and other data structures, and portable abstractions for 
+ * many OS services, like threads, sockets, files, etc.
+ *
+ */
+
+
 #ifndef WIRED_H
 #define WIRED_H 1
 

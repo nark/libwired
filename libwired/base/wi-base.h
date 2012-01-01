@@ -26,6 +26,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file wi-base.h 
+ * @brief Wired runtime basis helpers
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *  
+ * This component is in charge of initializing the Wired runtime
+ * regarding to your system configuration. It is also responsible of 
+ * classes registration into the Wired runtime.
+ * 
+ */
+
+
 #ifndef WI_BASE_H
 #define WI_BASE_H 1
 

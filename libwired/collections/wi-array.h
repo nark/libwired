@@ -26,6 +26,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file wi-array.h 
+ * @brief Provide support for array structure
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *
+ * NOTE: Very similar to NSArray classe in Objective-C language.
+ *
+ */
+
 #ifndef WI_ARRAY_H
 #define WI_ARRAY_H 1
 

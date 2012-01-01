@@ -26,6 +26,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file wi-macros.h 
+ * @brief Various common C macros
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *
+ */
+
 #ifndef WI_MACROS_H
 #define WI_MACROS_H 1
 

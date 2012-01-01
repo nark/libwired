@@ -26,6 +26,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file wi-byteorder.h 
+ * @brief Support for byte order
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *  
+ * Supports big and little endians
+ *
+ */
+
 #ifndef WI_BYTEORDER_H
 #define WI_BYTEORDER_H 1
 

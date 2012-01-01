@@ -26,6 +26,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+/**
+ * @file wi-private.h 
+ * @brief Private stuff used by libwired but not included in the API
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *
+ */
+
 #ifndef WI_PRIVATE_H
 #define WI_PRIVATE_H 1
 

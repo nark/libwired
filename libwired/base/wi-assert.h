@@ -26,6 +26,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file wi-assert.h 
+ * @brief Providing support for Wired assertion coding
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *
+ */
+
 #ifndef WI_ASSERT_H
 #define WI_ASSERT_H 1
 
