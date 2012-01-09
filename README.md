@@ -22,3 +22,9 @@ Wired library uses several external dependencies, which are usually distributed 
 To compile libwired, please refer to the configure help using the following command:
 
 `./configure --help`
+
+Use the following commands to generate documentation:
+
+`./documentation`
+
+This will generate a Doxygen style source code documentation in the doc/ directory and a wired.htlm file in the p7/ directory.
