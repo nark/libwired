@@ -754,9 +754,7 @@ static wi_boolean_t _wi_p7_socket_connect_key_exchange(wi_p7_socket_t *p7_socket
 	if(!p7_socket->cipher) {
 		return false;
 	}
-    
-    wi_log_info(WI_STR("wi-p7-socket.c: cipher : %@"), wi_cipher_name(p7_socket->cipher));
-    
+        
 	p7_message = wi_p7_message_with_name(WI_STR("p7.encryption.client_key"), wi_p7_socket_spec(p7_socket));
 
 	if(!p7_message)

@@ -50,4 +50,6 @@ WI_EXPORT wi_dictionary_t *					wi_sqlite3_execute_statement(wi_sqlite3_database
 WI_EXPORT wi_sqlite3_statement_t *			wi_sqlite3_prepare_statement(wi_sqlite3_database_t *, wi_string_t *, ...) WI_SENTINEL;
 WI_EXPORT wi_dictionary_t *					wi_sqlite3_fetch_statement_results(wi_sqlite3_database_t *, wi_sqlite3_statement_t *);
 
+WI_EXPORT int								wi_sqlite3_snapshot_database_at_path(wi_sqlite3_database_t *, wi_string_t *);
+
 #endif /* WI_SQLITE3_H */

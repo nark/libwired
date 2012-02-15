@@ -312,9 +312,9 @@ wi_dictionary_t * wi_sqlite3_fetch_statement_results(wi_sqlite3_database_t *data
 						instance	= wi_number_with_double(sqlite3_column_double(statement->statement, i));
 						break;
 						
-					case SQLITE_TEXT:
+					case SQLITE_TEXT: {
 						instance	= wi_string_with_cstring((const char *) sqlite3_column_text(statement->statement, i));
-						break;
+                    } break;
 						
 					case SQLITE_BLOB:
 						length		= sqlite3_column_bytes(statement->statement, i);
@@ -350,6 +350,48 @@ wi_dictionary_t * wi_sqlite3_fetch_statement_results(wi_sqlite3_database_t *data
 	wi_recursive_lock_unlock(database->lock);
 		
 	return results;
+}
+
+
+
+
+#pragma mark -
+
+int wi_sqlite3_snapshot_database_at_path(wi_sqlite3_database_t *database, wi_string_t *path) {
+    int rc;                     /* Function return code */
+    sqlite3 *pFile;             /* Database connection opened on zFilename */
+    sqlite3_backup *pBackup;    /* Backup handle used to copy data */
+    
+    /* Open the database file identified by zFilename. */
+    rc = sqlite3_open(wi_string_cstring(path), &pFile);
+    if( rc==SQLITE_OK ){
+        
+        /* Open the sqlite3_backup object used to accomplish the transfer */
+        pBackup = sqlite3_backup_init(pFile, "main", database->database, "main");
+        if( pBackup ){
+            
+            /* Each iteration of this loop copies 5 database pages from database
+             ** pDb to the backup database. If the return value of backup_step()
+             ** indicates that there are still further pages to copy, sleep for
+             ** 250 ms before repeating. */
+            do {
+                rc = sqlite3_backup_step(pBackup, 5);
+
+                if( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED ){
+                    sqlite3_sleep(250);
+                }
+            } while( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED );
+            
+            /* Release resources allocated by backup_init(). */
+            (void)sqlite3_backup_finish(pBackup);
+        }
+        rc = sqlite3_errcode(pFile);
+    }
+    
+    /* Close the database connection opened on database file zFilename
+     ** and return the result of this function. */
+    (void)sqlite3_close(pFile);
+    return rc;
 }
 
 
