@@ -358,7 +358,9 @@ wi_dictionary_t * wi_sqlite3_fetch_statement_results(wi_sqlite3_database_t *data
 #pragma mark -
 
 int wi_sqlite3_snapshot_database_at_path(wi_sqlite3_database_t *database, wi_string_t *path) {
-    int rc;                     /* Function return code */
+    int rc = 0;                     /* Function return code */
+    
+#if (SQLITE_VERSION_NUMBER >= 3007001)    
     sqlite3 *pFile;             /* Database connection opened on zFilename */
     sqlite3_backup *pBackup;    /* Backup handle used to copy data */
     
@@ -391,6 +393,8 @@ int wi_sqlite3_snapshot_database_at_path(wi_sqlite3_database_t *database, wi_str
     /* Close the database connection opened on database file zFilename
      ** and return the result of this function. */
     (void)sqlite3_close(pFile);
+#endif
+    
     return rc;
 }
 
