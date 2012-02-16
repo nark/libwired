@@ -374,7 +374,7 @@ int wi_sqlite3_snapshot_database_at_path(wi_sqlite3_database_t *database, wi_str
             
             /* Each iteration of this loop copies 5 database pages from database
              ** pDb to the backup database. If the return value of backup_step()
-             ** indicates that there are still further pages to copy, sleep for
+             ** indicates that there are still  further pages to copy, sleep for
              ** 250 ms before repeating. */
             do {
                 rc = sqlite3_backup_step(pBackup, 5);
