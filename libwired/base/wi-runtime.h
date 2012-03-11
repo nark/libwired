@@ -62,9 +62,14 @@ typedef uint16_t						wi_runtime_id_t;
  * @brief Low-level options for runtime instances
  */
 enum {
-	WI_RUNTIME_OPTION_ZOMBIE			= (1 << 0), /** Zombie reference option */
-	WI_RUNTIME_OPTION_IMMUTABLE			= (1 << 1), /** Immutable reference option */
-	WI_RUNTIME_OPTION_MUTABLE			= (1 << 2)  /** Mutable reference option */
+    /** Zombie reference option */
+	WI_RUNTIME_OPTION_ZOMBIE			= (1 << 0),
+    
+    /** Immutable reference option */
+	WI_RUNTIME_OPTION_IMMUTABLE			= (1 << 1),
+    
+    /** Mutable reference option */
+	WI_RUNTIME_OPTION_MUTABLE			= (1 << 2)
 };
 
 

@@ -38,6 +38,21 @@
  *
  */
 
+/* Documentation tag for Doxygen
+ */
+
+/*! \mainpage Source-code Documentation
+ *
+ * \section intro_sec Introduction
+ *
+ * This is the source-code documentation of libwired. This library was created and 
+ * is mainly intended for use by the Wired network suite. It contains collections 
+ * and other data structures, and portable abstractions for many OS services, 
+ * like threads, sockets, files, etc.
+ *
+ * <BR><BR>
+ *
+ */
 
 #ifndef WIRED_H
 #define WIRED_H 1

@@ -47,15 +47,42 @@
 #include <math.h>
 #include <inttypes.h>
 
+
+/**
+ @def WI_EXPORT
+ 
+ A wrapper keyword to define external variables and functions.
+ */
 #ifdef __cplusplus
 #define WI_EXPORT					extern "C"
 #else
 #define WI_EXPORT					extern
 #endif
 
+
+/**
+ @def WI_INLINE
+  
+ A wrapper keyword to define inline functions.
+ */
 #define WI_INLINE					inline
+
+
+
+/**
+ @def WI_STATIC_INLINE
+ 
+ A wrapper keyword to define static inline functions.
+ */
 #define WI_STATIC_INLINE			static inline
 
+
+
+/**
+ @def WI_DEPRECATED
+ 
+ A wrapper keyword to define depreciated attributes.
+ */
 #ifdef __GNUC__
 #define WI_DEPRECATED				__attribute__ ((deprecated))
 #define WI_PRINTF_FORMAT(x, y)		__attribute__ ((format (printf, x, y)))
@@ -66,11 +93,21 @@
 #define WI_STRFTIME_FORMAT(x)
 #endif
 
+
+
+/**
+ @def WI_SENTINEL
+ 
+ A wrapper keyword for GNUC sentinels.
+ */
 #if __GNUC__ == 4 || __GNUC__ > 4
 #define WI_SENTINEL					__attribute__ ((sentinel))
 #else
 #define WI_SENTINEL
 #endif
+
+
+
 
 #if __LP64__
 #define WI_64						1
@@ -78,8 +115,19 @@
 typedef int64_t						wi_integer_t;
 typedef uint64_t					wi_uinteger_t;
 
+/**
+ Maximum value of a 64 bits integer.
+ */
 #define WI_INTEGER_MAX				9223372036854775807LL
+
+/**
+ Maximum value of a 64 bits integer.
+ */
 #define WI_UINTEGER_MAX				18446744073709551615ULL
+
+/**
+ Minimun value of a 64 bits unsigned integer.
+ */
 #define WI_INTEGER_MIN				(-WI_INTEGER_MAX-1)
 #else
 #define WI_32						1
@@ -87,24 +135,57 @@ typedef uint64_t					wi_uinteger_t;
 typedef int32_t						wi_integer_t;
 typedef uint32_t					wi_uinteger_t;
 
+/**
+ Maximum value of a 32 bits integer.
+ */
 #define WI_INTEGER_MAX				2147483647
+
+/**
+ Maximum value of a 32 bits unsigned integer.
+ */
 #define WI_UINTEGER_MAX				4294967295U
+
+/**
+ Minimun value of a 32 bits unsigned integer.
+ */
 #define WI_INTEGER_MIN				(-WI_INTEGER_MAX-1)
 #endif
 
 
+
+
+/**
+ * @enum Range Not Found
+ * @brief Location value of a not found rage.
+ */
 enum {
 	WI_NOT_FOUND					= WI_INTEGER_MAX
 };
 
-
+/**
+ * @struct _wi_range wi-base.h WI_BASE_H
+ * @brief Range Structure 
+ * 
+ * _wi_range is a logical representation of 
+ * a portion of a serie of indexes.
+ */
 struct _wi_range {
+    /** The range location */
 	wi_uinteger_t					location;
+    
+    /** The range length */
 	wi_uinteger_t					length;
 };
 typedef struct _wi_range			wi_range_t;
 
-
+/**
+ * @fn WI_STATIC_INLINE wi_range_t wi_make_range(wi_uinteger_t location, wi_uinteger_t length)
+ * @brief Range constructor
+ * @param location is the index location in a serie
+ * @param length is the length of the sub-serie
+ * @return A new range value
+ *
+ */
 WI_STATIC_INLINE wi_range_t wi_make_range(wi_uinteger_t location, wi_uinteger_t length) {
 	wi_range_t		range = { location, length };
 	
@@ -113,21 +194,39 @@ WI_STATIC_INLINE wi_range_t wi_make_range(wi_uinteger_t location, wi_uinteger_t 
 
 
 
+
+/**
+ * @struct _wi_size wi-base.h WI_BASE_H
+ * @brief Size Structure 
+ * 
+ * _wi_size represents a two-dimensional size.
+ */
 struct _wi_size {
 	wi_uinteger_t					width;
 	wi_uinteger_t					height;
 };
 typedef struct _wi_size				wi_size_t;
 
-
+/**
+ * @fn WI_STATIC_INLINE wi_size_t wi_make_size(wi_uinteger_t width, wi_uinteger_t height)
+ * @brief Size constructor
+ * @param width size of a planar object
+ * @param height size of a planar object
+ * @return A new size value
+ *
+ */
 WI_STATIC_INLINE wi_size_t wi_make_size(wi_uinteger_t width, wi_uinteger_t height) {
 	wi_size_t		size = { width, height };
 	
 	return size;
 }
 
-
-
+/**
+ * @struct _wi_size wi-base.h WI_BASE_H
+ * @brief Point Structure 
+ * 
+ * _wi_size represents a point in a Cartesian coordinate system.
+ */
 struct _wi_point {
 	wi_uinteger_t					x;
 	wi_uinteger_t					y;
@@ -135,6 +234,14 @@ struct _wi_point {
 typedef struct _wi_point			wi_point_t;
 
 
+/**
+ * @fn WI_STATIC_INLINE wi_point_t wi_make_point(wi_uinteger_t x, wi_uinteger_t y)
+ * @brief Point constructor
+ * @param x x-coordinate (or abscissa) value in a Cartesian coordinate system.
+ * @param y y-coordinate (or ordinate) value in a Cartesian coordinate system.
+ * @return A new point value
+ *
+ */
 WI_STATIC_INLINE wi_point_t wi_make_point(wi_uinteger_t x, wi_uinteger_t y) {
 	wi_point_t		point = { x, y };
 	
@@ -188,12 +295,31 @@ WI_STATIC_INLINE wi_uinteger_t wi_exp2m1(wi_uinteger_t n) {
 }
 
 	
+/**
+ wi_boolean_t
+ 
+ Wired boolean type is based on a 32 bits integer.
+ Must be 1 or 0. The library provides true and false keywords
+ to facilitate use.
+ */
 typedef int32_t						wi_boolean_t;
 
+/**
+ @def true
+ 
+ Redefines the true keyword for wi_boolean_t
+ true equals 1
+ */
 #ifndef true
 #define true						1
 #endif
 
+/**
+ @def false
+ 
+ Redefines the false keyword for wi_boolean_t
+ false equals 0
+ */
 #ifndef false
 #define false						0
 #endif

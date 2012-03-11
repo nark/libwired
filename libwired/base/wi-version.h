@@ -39,6 +39,11 @@
 
 #include <wired/wi-base.h>
 
+/**
+ Version String
+ 
+ Returns the running version of libwired.
+ */
 WI_EXPORT wi_string_t				*wi_version_string;
 
 #endif /* WI_VERSION_H */

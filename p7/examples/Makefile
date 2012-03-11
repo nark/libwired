@@ -6,8 +6,8 @@ rundir			= ../../run
 DEFS			= -DHAVE_CONFIG_H
 CC				= gcc
 CFLAGS			= -g -O2
-CPPFLAGS		= -DWI_CORESERVICES -DWI_CARBON -DWI_DIGESTS -DWI_CIPHERS
-LDFLAGS			= -L$(rundir)/lib 
+CPPFLAGS		= -I/usr/local/include -DWI_CORESERVICES -DWI_CARBON -DWI_DIGESTS -DWI_CIPHERS
+LDFLAGS			= -L$(rundir)/lib -L/usr/local/lib
 LIBS			= -lwired -framework CoreServices -framework Carbon
 INCLUDES		= -I$(abs_top_srcdir) -I$(rundir)/include
 

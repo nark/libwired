@@ -101,7 +101,6 @@ void wi_log_open(void) {
 	
 	if(wi_log_syslog) {
 		name = wi_process_name(wi_process());
-		
 		openlog(wi_string_cstring(name), LOG_PID | LOG_NDELAY, wi_log_syslog_facility);
 	}
 }
