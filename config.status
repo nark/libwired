@@ -490,7 +490,7 @@ s,@PACKAGE_NAME@,|#_!!_#|libwired,g
 s,@PACKAGE_TARNAME@,|#_!!_#|libwired,g
 s,@PACKAGE_VERSION@,|#_!!_#|1.0,g
 s,@PACKAGE_STRING@,|#_!!_#|libwired 1.0,g
-s,@PACKAGE_BUGREPORT@,|#_!!_#|axel@|#_!!_#|zankasoftware.com,g
+s,@PACKAGE_BUGREPORT@,|#_!!_#|dev@|#_!!_#|read-write.fr,g
 s,@exec_prefix@,|#_!!_#|${prefix},g
 s,@prefix@,|#_!!_#|/usr/local,g
 s,@program_transform_name@,|#_!!_#|s\,x\,x\,,g
@@ -795,7 +795,7 @@ which seems to be undefined.  Please make sure it is defined." >&2;}
   #
     # First, check the format of the line:
     cat >"$tmp/defines.sed" <<\CEOF
-/^[	 ]*#[	 ]*undef[	 ][	 ]*[_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ][_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]*[	 ]*$/b def
+/^[	 ]*#[	 ]*undef[	 ][	 ]*[_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ][_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]*[	 ]*/b def
 /^[	 ]*#[	 ]*define[	 ][	 ]*[_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ][_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]*[(	 ]/b def
 b
 :def
@@ -804,7 +804,7 @@ s,^\([	 #]*\)[^	 ]*\([	 ]*PACKAGE_NAME\)[	 (].*,\1define\2 "libwired" ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*PACKAGE_TARNAME\)[	 (].*,\1define\2 "libwired" ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*PACKAGE_VERSION\)[	 (].*,\1define\2 "1.0" ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*PACKAGE_STRING\)[	 (].*,\1define\2 "libwired 1.0" ,
-s,^\([	 #]*\)[^	 ]*\([	 ]*PACKAGE_BUGREPORT\)[	 (].*,\1define\2 "axel@zankasoftware.com" ,
+s,^\([	 #]*\)[^	 ]*\([	 ]*PACKAGE_BUGREPORT\)[	 (].*,\1define\2 "dev@read-write.fr" ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*WI_VERSION\)[	 (].*,\1define\2 "1.0" ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*STDC_HEADERS\)[	 (].*,\1define\2 1 ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_SYS_TYPES_H\)[	 (].*,\1define\2 1 ,
@@ -853,7 +853,7 @@ CEOF
     sed -f "$tmp/defines.sed" $ac_file_inputs >"$tmp/out1"
     # First, check the format of the line:
     cat >"$tmp/defines.sed" <<\CEOF
-/^[	 ]*#[	 ]*undef[	 ][	 ]*[_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ][_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]*[	 ]*$/b def
+/^[	 ]*#[	 ]*undef[	 ][	 ]*[_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ][_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]*[	 ]*/b def
 /^[	 ]*#[	 ]*define[	 ][	 ]*[_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ][_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]*[(	 ]/b def
 b
 :def

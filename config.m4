@@ -29,7 +29,7 @@ AC_DEFUN([WI_CHECK_SVN_REVISION], [
 		WI_REVISION=0
 	fi
 
-	AC_DEFINE_UNQUOTED([WI_REVISION], $WI_REVISION, [Subversion revision])
+	AC_DEFINE_UNQUOTED([WI_REVISION], "$WI_REVISION", [Subversion revision])
 ])
 
 

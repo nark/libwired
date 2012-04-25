@@ -26,6 +26,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file wi-string.h 
+ * @brief This file provide support for string objects.
+ * @author Axel Andersson, Rafaël Warnault
+ * @version 2.0
+ *
+ */
+
 #ifndef WI_STRING_H
 #define WI_STRING_H 1
 

@@ -30,7 +30,7 @@
 
 /**
  * @file wi-runtime.h 
- * @brief This file provide an abstract object runtime for C environment.
+ * @brief This file provide an abstract object-oriented runtime for C environment.
  * @author Axel Andersson, Rafaël Warnault
  * @version 2.0
  *
@@ -46,16 +46,32 @@
 
 #include <wired/wi-base.h>
 
+
+
+
 /**
- * @def wi_runtime_instance_t
- * @brief Raw type used by runtime to define an instance of a class
+ * @typedef wi_runtime_instance_t
+ *
+ * Raw type used by runtime to define an instance of a class
  */
 typedef void							wi_runtime_instance_t;
 
+
+
+/**
+ * @typedef wi_runtime_id_t
+ *
+ * Runtime ID
+ */
 enum {
+    /** Null ID for the runtime */
 	WI_RUNTIME_ID_NULL					= 0
 };
 typedef uint16_t						wi_runtime_id_t;
+
+
+
+
 
 /**
  * @enum Runtime options
@@ -73,21 +89,23 @@ enum {
 };
 
 
+
+
+
 typedef void							wi_dealloc_func_t(wi_runtime_instance_t *);
 typedef wi_runtime_instance_t *			wi_copy_func_t(wi_runtime_instance_t *);
 typedef wi_boolean_t					wi_is_equal_func_t(wi_runtime_instance_t *, wi_runtime_instance_t *);
 typedef wi_string_t *					wi_description_func_t(wi_runtime_instance_t *);
 typedef wi_hash_code_t					wi_hash_func_t(wi_runtime_instance_t *);
-
 typedef wi_runtime_instance_t *			wi_retain_func_t(wi_runtime_instance_t *);
 typedef void							wi_release_func_t(wi_runtime_instance_t *);
 typedef wi_integer_t					wi_compare_func_t(wi_runtime_instance_t *, wi_runtime_instance_t *);
 
 /**
- * @struct _wi_runtime_class wi-runtime.h WI_RUNTIME_H
- * @brief Runtime Class 
- * 
- * _wi_runtime_class represents a Wired class instance 
+ * @brief Runtime Instance Class 
+ * @extends wi_runtime_base_t
+ *
+ * wi_runtime_class_t represents a Wired class instance 
  * used by the Wired runtime to manage object adstraction.
  * Each class instance contains a name and function pointers
  * for basis memory and runtime features.
@@ -102,11 +120,17 @@ struct _wi_runtime_class {
 };
 typedef struct _wi_runtime_class		wi_runtime_class_t;
 
+
+
+
+
 /**
- * @struct _wi_runtime_base wi-runtime.h WI_RUNTIME_H
- * @brief Runtime Base 
+ * @brief Runtime Base Class 
  * 
- * _wi_runtime_base represents the Runtime itself.
+ * wi_runtime_base_t represents the top-level superclass
+ * in the libwired object graph. It provides attributes
+ * which glue an object instance to the Wired runtime and 
+ * allows memory management by reference counting.
  */
 struct _wi_runtime_base {
 	uint32_t							magic;
@@ -194,6 +218,7 @@ WI_EXPORT wi_runtime_instance_t *		wi_runtime_create_instance_with_options(wi_ru
 
 
 
+
 /*** RUNTIME INSTANCE ACCESSORS */
 /**
  * @fn WI_EXPORT wi_runtime_class_t * wi_runtime_class(wi_runtime_instance_t *instance)
@@ -235,6 +260,7 @@ WI_EXPORT uint8_t						wi_runtime_options(wi_runtime_instance_t *instance);
 
 
 
+
 /*** RUNTIME INSTANCE MEMORY MANAGEMENT */
 /**
  * @fn WI_EXPORT wi_runtime_instance_t * wi_retain(wi_runtime_instance_t *instance)
@@ -265,6 +291,7 @@ WI_EXPORT uint16_t						wi_retain_count(wi_runtime_instance_t *instance);
  * Be aware that using this method on a non-retained instance will raise an assertion.
  */
 WI_EXPORT void							wi_release(wi_runtime_instance_t *instance);
+
 
 
 
@@ -318,8 +345,23 @@ WI_EXPORT wi_string_t *					wi_description(wi_runtime_instance_t *instance);
  */
 WI_EXPORT wi_hash_code_t				wi_hash(wi_runtime_instance_t *instance);
 
-
+/**
+ * @fn WI_EXPORT void wi_show(wi_runtime_instance_t *)
+ * @brief Print the instance into the log
+ * @param instance must be a valid wi_runtime_instance or descendant
+ *
+ */
 WI_EXPORT void							wi_show(wi_runtime_instance_t *);
+
+
+
+/**
+ * Zombie flag
+ * 
+ * A boolean value that indicates if zombie tracking is enabled.
+ */
 WI_EXPORT wi_boolean_t					wi_zombie_enabled;
+
+
 
 #endif /* WI_RUNTIME_H */

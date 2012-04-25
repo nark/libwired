@@ -92,6 +92,12 @@
 		(index), (string)->length, (string))
 
 
+/**
+ * @struct _wi_string wi-string.h WI_STRING_H
+ * @brief Size Structure 
+ * 
+ * String class.
+ */
 struct _wi_string {
 	wi_runtime_base_t					base;
 	

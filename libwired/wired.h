@@ -31,27 +31,6 @@
  * @brief This header file include every public headers of the library
  * @author Axel Andersson, Rafaël Warnault
  * @version 2.0
- *
- * libwired was created and is mainly intended for use by the Wired network suite. 
- * It contains collections and other data structures, and portable abstractions for 
- * many OS services, like threads, sockets, files, etc.
- *
- */
-
-/* Documentation tag for Doxygen
- */
-
-/*! \mainpage Source-code Documentation
- *
- * \section intro_sec Introduction
- *
- * This is the source-code documentation of libwired. This library was created and 
- * is mainly intended for use by the Wired network suite. It contains collections 
- * and other data structures, and portable abstractions for many OS services, 
- * like threads, sockets, files, etc.
- *
- * <BR><BR>
- *
  */
 
 #ifndef WIRED_H
@@ -113,3 +92,114 @@
 #include <wired/wi-x509.h>
 
 #endif /* WIRED_H */
+
+
+/*! \mainpage Presentation of libwired
+ *
+ * \section Introduction
+ *
+ * This is the source-code documentation of libwired. This library was created and 
+ * is mainly intended for use by the Wired network suite. It contains collections 
+ * and other data structures, and portable abstractions for many OS services, 
+ * like threads, sockets, files, etc.
+ *
+ * libwired is written in ANSI-C to ensure portability for many operating systems. The 
+ * programming interface is mainly written following object-oriented C techniques.
+ * The implementation logic and vocabulary are very close to GNUstep/Cocoa APIs.
+ *
+ * The Wired protocol is a BBS-oriented network protocol (similar to Hotline, Carracho, 
+ * KDX, etc.). It provides communication features like chat, messaging, and file 
+ * tranfers in a very secure server/client architecture. 
+ *
+ * \section Requirements
+ *
+ * \subsection OpenSSL
+ *
+ * http://www.openssl.org/source/
+ *
+ * \subsection libxml2
+ *
+ * http://xmlsoft.org/
+ *
+ * \subsection sqlite3
+ *
+ * http://www.sqlite.org/
+ *
+ *
+ * \section Architecture
+ *
+ * The Wired library is composed of several logical modules.
+ * 
+ * \code
+ * libwired/
+ *     base/
+ *     collections/
+ *     crypto/
+ *     data/
+ *     file/
+ *     misc/
+ *     net/
+ *     p7/
+ *     system/
+ *     thridparty/
+ *     thread/
+ * \endcode
+ *
+ * \subsection Base
+ *
+ * The base module mainly provides base types, functions and macros for the Wired
+ * object-oriented runtime and library management.
+ *
+ * \subsection Collections
+ *
+ * The collection module regroups Wired classes to manage collections of objects,
+ * like array, set, dictionary and their related object enumerating operations.
+ *
+ * \subsection Crypto
+ *
+ * The crypto module handles cryptographic features, mainly built around OpenSSL
+ * and CommonCrypto libraries, in order to make the Wired network protocol secure.
+ *
+ * \subsection Data
+ *
+ * The data module regroups object representations of low-level data types like 
+ * raw data, strings, dates, numbers, etc.
+ *
+ * \subsection File
+ *
+ * The data module provides file management features by taking care of operating
+ * systems implemenations.
+ *
+ * \subsection Misc
+ *
+ * The misc module regroups miscellaneous classes used by the Wired library for
+ * errors management, regular expressions, config files management, etc.
+ *
+ * \subsection Net
+ *
+ * The net module regroups low-level implementation for point-to-point network
+ * communications using sockets.
+ *
+ * \subsection P7
+ *
+ * The p7 module regroups classes related to the network implementation of the 
+ * Wired protocol version 2.0, based on a XML specification. 
+ * 
+ * \subsection System
+ *
+ * The system module provides an interface to interact with operating system
+ * features like process, logs, tasks, terminal, etc.
+ * 
+ * \subsection Third-Party
+ *
+ * The thirdparty module regroups wrappers for third-party libraries. Here it 
+ * is about libxml2 and sqlite3 libraries.
+ *
+ * \subsection Thread
+ *
+ * The thread module provides support for threads and locks based on pthread
+ * library if this component is provided by the target operating system.
+ *
+ * <BR><BR>
+ *
+ */

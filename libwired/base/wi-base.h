@@ -202,7 +202,10 @@ WI_STATIC_INLINE wi_range_t wi_make_range(wi_uinteger_t location, wi_uinteger_t 
  * _wi_size represents a two-dimensional size.
  */
 struct _wi_size {
+    /** width size of a planar object */
 	wi_uinteger_t					width;
+    
+    /** height size of a planar object */
 	wi_uinteger_t					height;
 };
 typedef struct _wi_size				wi_size_t;
@@ -221,14 +224,19 @@ WI_STATIC_INLINE wi_size_t wi_make_size(wi_uinteger_t width, wi_uinteger_t heigh
 	return size;
 }
 
+
+
 /**
- * @struct _wi_size wi-base.h WI_BASE_H
+ * @struct wi_point_t wi-base.h WI_BASE_H
  * @brief Point Structure 
  * 
- * _wi_size represents a point in a Cartesian coordinate system.
+ * wi_point_t represents a point in a Cartesian coordinate system.
  */
 struct _wi_point {
+    /** x-coordinate (or abscissa) value in a Cartesian coordinate system. */
 	wi_uinteger_t					x;
+    
+    /** y-coordinate (or ordinate) value in a Cartesian coordinate system. */
 	wi_uinteger_t					y;
 };
 typedef struct _wi_point			wi_point_t;
@@ -324,19 +332,60 @@ typedef int32_t						wi_boolean_t;
 #define false						0
 #endif
 
-
+/** @typedef wi_hash_code_t 
+ *
+ * Object hashcode type */
 typedef wi_uinteger_t				wi_hash_code_t;
 
+
+/** @typedef wi_time_interval_t
+ *  
+ * Time interval type */
 typedef double						wi_time_interval_t;
 
+
+/** @typedef wi_address_t
+ *
+ * Address class */
 typedef struct _wi_address			wi_address_t;
+
+
+/** @typedef wi_array_t
+ *
+ * Array class */
 typedef struct _wi_array			wi_array_t;
+
+
+/** @typedef wi_mutable_array_t
+ * 
+ * Mutable array class */
 typedef struct _wi_array			wi_mutable_array_t;
+
+
+/** @typedef wi_string_t 
+ *
+ * String class */
 typedef struct _wi_string			wi_string_t;
+
+
+/** @typedef wi_mutable_string_t 
+ * 
+ * Mutable string class */
 typedef struct _wi_string			wi_mutable_string_t;
 
+/** @typedef wi_p7_message_t
+ * 
+ * P7 message class */
 typedef struct _wi_p7_message		wi_p7_message_t;
+
+/** @typedef wi_p7_socket_t
+ *
+ * P7 socket class */
 typedef struct _wi_p7_socket		wi_p7_socket_t;
+
+/** @typedef wi_p7_spec_t
+ *
+ * P7 specification class */
 typedef struct _wi_p7_spec			wi_p7_spec_t;
 
 
