@@ -598,6 +598,7 @@ static wi_p7_spec_t * _wi_p7_spec_init_builtin_spec(wi_p7_spec_t *p7_spec) {
 
 
 wi_p7_spec_t * wi_p7_spec_init_with_file(wi_p7_spec_t *p7_spec, wi_string_t *path, wi_p7_originator_t originator) {
+		
 	(void) wi_p7_spec_builtin_spec();
 	
 	p7_spec = _wi_p7_spec_init(p7_spec, originator);
@@ -615,6 +616,7 @@ wi_p7_spec_t * wi_p7_spec_init_with_file(wi_p7_spec_t *p7_spec, wi_string_t *pat
 
 
 wi_p7_spec_t * wi_p7_spec_init_with_string(wi_p7_spec_t *p7_spec, wi_string_t *string, wi_p7_originator_t originator) {
+	
 	(void) wi_p7_spec_builtin_spec();
 	
 	p7_spec = _wi_p7_spec_init(p7_spec, originator);
@@ -705,7 +707,7 @@ static wi_string_t * _wi_p7_spec_description(wi_runtime_instance_t *instance) {
 
 static wi_boolean_t _wi_p7_spec_load_builtin(wi_p7_spec_t *p7_spec) {
 	xmlDocPtr		doc;
-	
+		
 	doc = xmlParseDoc(_wi_p7_spec_builtin);
 	
 	if(!doc) {
@@ -715,6 +717,8 @@ static wi_boolean_t _wi_p7_spec_load_builtin(wi_p7_spec_t *p7_spec) {
 	}
 	
 	if(!_wi_p7_spec_load_spec(p7_spec, doc)) {
+		wi_log_info(WI_STR("no spec loaded"));
+		
 		xmlFreeDoc(doc);
 		
 		return false;

@@ -138,4 +138,7 @@ WI_EXPORT wi_file_offset_t			wi_file_offset(wi_file_t *);
 WI_EXPORT wi_boolean_t				wi_file_truncate(wi_file_t *, wi_file_offset_t);
 WI_EXPORT void						wi_file_close(wi_file_t *);
 
+WI_EXPORT wi_boolean_t				wi_file_compress_at_path(wi_file_t *, wi_string_t *, wi_integer_t);
+WI_EXPORT wi_boolean_t				wi_file_decompress_at_path(wi_file_t *, wi_string_t *);
+
 #endif /* WI_FILE_H */

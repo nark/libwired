@@ -35,6 +35,7 @@ int wi_sqlite3_dummy = 0;
 #else
 
 #include <wired/wi-date.h>
+#include <wired/wi-file.h>
 #include <wired/wi-lock.h>
 #include <wired/wi-macros.h>
 #include <wired/wi-null.h>
@@ -358,41 +359,53 @@ wi_dictionary_t * wi_sqlite3_fetch_statement_results(wi_sqlite3_database_t *data
 #pragma mark -
 
 int wi_sqlite3_snapshot_database_at_path(wi_sqlite3_database_t *database, wi_string_t *path) {
-    int rc = 0;                     /* Function return code */
-    
-    sqlite3 *pFile;             /* Database connection opened on zFilename */
-    sqlite3_backup *pBackup;    /* Backup handle used to copy data */
-    
-    /* Open the database file identified by zFilename. */
-    rc = sqlite3_open(wi_string_cstring(path), &pFile);
-    if( rc==SQLITE_OK ){
-        
-        /* Open the sqlite3_backup object used to accomplish the transfer */
-        pBackup = sqlite3_backup_init(pFile, "main", database->database, "main");
-        if( pBackup ){
-            
-            /* Each iteration of this loop copies 5 database pages from database
-             ** pDb to the backup database. If the return value of backup_step()
-             ** indicates that there are still  further pages to copy, sleep for
-             ** 250 ms before repeating. */
-            do {
-                rc = sqlite3_backup_step(pBackup, 5);
+	wi_file_t 			*source;
+    int 				rc = 0;                     /* Function return code */
 
-                if( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED ){
-                    sqlite3_sleep(250);
-                }
-            } while( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED );
-            
-            /* Release resources allocated by backup_init(). */
-            (void)sqlite3_backup_finish(pBackup);
-        }
-        rc = sqlite3_errcode(pFile);
-    }
-    
-    /* Close the database connection opened on database file zFilename
-     ** and return the result of this function. */
-    (void)sqlite3_close(pFile);
-    
+    if(sqlite3_libversion_number() > 3006011) {
+		
+	    sqlite3 			*pFile;      /* Database connection opened on zFilename */
+	    sqlite3_backup 		*pBackup;    /* Backup handle used to copy data */
+	    
+	    /* Open the database file identified by zFilename. */
+	    rc = sqlite3_open(wi_string_cstring(path), &pFile);
+	    if( rc==SQLITE_OK ){
+	        
+	        /* Open the sqlite3_backup object used to accomplish the transfer */
+	        pBackup = sqlite3_backup_init(pFile, "main", database->database, "main");
+	        if( pBackup ){
+	            
+	            /* Each iteration of this loop copies 5 database pages from database
+	             ** pDb to the backup database. If the return value of backup_step()
+	             ** indicates that there are still  further pages to copy, sleep for
+	             ** 250 ms before repeating. */
+	            do {
+	                rc = sqlite3_backup_step(pBackup, 5);
+
+	                if( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED ){
+	                    sqlite3_sleep(250);
+	                }
+	            } while( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED );
+	            
+	            /* Release resources allocated by backup_init(). */
+	            (void)sqlite3_backup_finish(pBackup);
+	        }
+	        rc = sqlite3_errcode(pFile);
+	    }
+	    
+	    /* Close the database connection opened on database file zFilename
+	     ** and return the result of this function. */
+	    (void)sqlite3_close(pFile);
+
+	}
+
+	/* TODO: Compress file if suceeded (debug) */ 
+	// if(rc == SQLITE_OK) {
+	// 	source 	= wi_file_for_reading(path);
+
+	// 	wi_file_compress_at_path(source, wi_string_by_appending_string(path, WI_STR(".zip")), 1);
+	// }
+	
     return rc;
 }
 

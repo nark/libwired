@@ -54,6 +54,10 @@
 #include <wired/wi-runtime.h>
 #include <wired/wi-string.h>
 
+#include <zlib.h>
+
+ #define CHUNK 16384
+
 #define _WI_FILE_ASSERT_OPEN(file) \
 	WI_ASSERT((file)->fd >= 0, "%@ is not open", (file))
 
@@ -451,3 +455,151 @@ void wi_file_close(wi_file_t *file) {
 		file->fd = -1;
 	}
 }
+
+
+
+
+#pragma mark -
+
+wi_boolean_t wi_file_compress_at_path(wi_file_t *file, wi_string_t *path, wi_integer_t level) {
+	FILE 	*source;
+	FILE 	*dest;
+
+	int ret, flush;
+    unsigned have;
+    z_stream strm;
+    unsigned char in[CHUNK];
+    unsigned char out[CHUNK];
+
+    /* Check input and output files */
+    if (NULL == (source = fdopen(file->fd, "r")))
+    	return false;
+
+    if (NULL == (dest = fopen(wi_string_cstring(path), "rw")))
+    	return false;
+
+    /* allocate deflate state */
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    strm.opaque = Z_NULL;
+    ret = deflateInit(&strm, level);
+    if (ret != Z_OK)
+        return false;
+
+    /* compress until end of file */
+    do {
+        strm.avail_in = fread(in, 1, CHUNK, source);
+        if (ferror(source)) {
+            (void)deflateEnd(&strm);
+            return false;
+        }
+        flush = feof(source) ? Z_FINISH : Z_NO_FLUSH;
+        strm.next_in = in;
+
+        /* run deflate() on input until output buffer not full, finish
+           compression if all of source has been read in */
+        do {
+            strm.avail_out = CHUNK;
+            strm.next_out = out;
+            ret = deflate(&strm, flush);    /* no bad return value */
+            assert(ret != Z_STREAM_ERROR);  /* state not clobbered */
+            have = CHUNK - strm.avail_out;
+            if (fwrite(out, 1, have, dest) != have || ferror(dest)) {
+                (void)deflateEnd(&strm);
+                return false;
+            }
+        } while (strm.avail_out == 0);
+        assert(strm.avail_in == 0);     /* all input will be used */
+
+        /* done when last data in file processed */
+    } while (flush != Z_FINISH);
+    assert(ret == Z_STREAM_END);        /* stream will be complete */
+
+    /* clean up and return */
+    (void)deflateEnd(&strm);
+
+    /* Close file pointers */
+	fclose(source);
+	fclose(dest);
+
+    return true;
+}
+
+
+
+wi_boolean_t wi_file_decompress_at_path(wi_file_t *file, wi_string_t *path) {
+	FILE 	*source;
+	FILE 	*dest;
+
+	int ret;
+    unsigned have;
+    z_stream strm;
+    unsigned char in[CHUNK];
+    unsigned char out[CHUNK];
+
+    /* Check input and output files */
+    if (NULL == (source = fdopen(file->fd, "r")))
+    	return false;
+
+    if (NULL == (dest = fopen(wi_string_cstring(path), "rw")))
+    	return false;
+
+    /* allocate inflate state */
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    strm.opaque = Z_NULL;
+    strm.avail_in = 0;
+    strm.next_in = Z_NULL;
+    ret = inflateInit(&strm);
+    if (ret != Z_OK)
+        return ret;
+
+    /* decompress until deflate stream ends or end of file */
+    do {
+        strm.avail_in = fread(in, 1, CHUNK, source);
+        if (ferror(source)) {
+            (void)inflateEnd(&strm);
+            return Z_ERRNO;
+        }
+        if (strm.avail_in == 0)
+            break;
+        strm.next_in = in;
+
+        /* run inflate() on input until output buffer not full */
+        do {
+            strm.avail_out = CHUNK;
+            strm.next_out = out;
+            ret = inflate(&strm, Z_NO_FLUSH);
+            
+            if(ret == Z_STREAM_ERROR);  /* state not clobbered */
+            	continue;
+
+            switch (ret) {
+            case Z_NEED_DICT:
+                ret = Z_DATA_ERROR;     /* and fall through */
+            case Z_DATA_ERROR:
+            case Z_MEM_ERROR:
+                (void)inflateEnd(&strm);
+                return ret;
+            }
+            have = CHUNK - strm.avail_out;
+            if (fwrite(out, 1, have, dest) != have || ferror(dest)) {
+                (void)inflateEnd(&strm);
+                return Z_ERRNO;
+            }
+        } while (strm.avail_out == 0);
+
+        /* done when inflate() says it's done */
+    } while (ret != Z_STREAM_END);
+
+    /* clean up and return */
+    (void)inflateEnd(&strm);
+
+    /* Close file pointers */
+	fclose(source);
+	fclose(dest);
+
+    return (ret == Z_STREAM_END) ? true : false;
+}
+
+
