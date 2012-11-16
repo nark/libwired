@@ -502,18 +502,18 @@ wi_boolean_t wi_file_compress_at_path(wi_file_t *file, wi_string_t *path, wi_int
             strm.avail_out = CHUNK;
             strm.next_out = out;
             ret = deflate(&strm, flush);    /* no bad return value */
-            assert(ret != Z_STREAM_ERROR);  /* state not clobbered */
+            //assert(ret != Z_STREAM_ERROR);  /* state not clobbered */
             have = CHUNK - strm.avail_out;
             if (fwrite(out, 1, have, dest) != have || ferror(dest)) {
                 (void)deflateEnd(&strm);
                 return false;
             }
         } while (strm.avail_out == 0);
-        assert(strm.avail_in == 0);     /* all input will be used */
+        //assert(strm.avail_in == 0);     /* all input will be used */
 
         /* done when last data in file processed */
     } while (flush != Z_FINISH);
-    assert(ret == Z_STREAM_END);        /* stream will be complete */
+    //assert(ret == Z_STREAM_END);        /* stream will be complete */
 
     /* clean up and return */
     (void)deflateEnd(&strm);
