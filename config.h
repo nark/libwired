@@ -66,7 +66,7 @@
 #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have the <libxml/parser.h> header file. */
-#define HAVE_LIBXML_PARSER_H 1
+/* #undef HAVE_LIBXML_PARSER_H */
 
 /* Define to 1 if you have the <machine/param.h> header file. */
 #define HAVE_MACHINE_PARAM_H 1
@@ -93,7 +93,7 @@
 #define HAVE_NXGETLOCALARCHINFO 1
 
 /* Define to 1 if you have the <openssl/sha.h> header file. */
-#define HAVE_OPENSSL_SHA_H 1
+/* #undef HAVE_OPENSSL_SHA_H */
 
 /* Define to 1 if you have the <openssl/ssl.h> header file. */
 /* #undef HAVE_OPENSSL_SSL_H */
@@ -105,7 +105,7 @@
 #define HAVE_PTHREAD_ATTR_SETSCHEDPOLICY 1
 
 /* Define to 1 if you have the <pthread.h> header file. */
-#define HAVE_PTHREAD_H 1
+/* #undef HAVE_PTHREAD_H */
 
 /* Define to 1 if the system has the type `ptrdiff_t'. */
 #define HAVE_PTRDIFF_T 1
@@ -123,13 +123,13 @@
 /* #undef HAVE_SETPROCTITLE */
 
 /* Define to 1 if you have the `sqlite3_extended_errcode' function. */
-#define HAVE_SQLITE3_EXTENDED_ERRCODE 1
+/* #undef HAVE_SQLITE3_EXTENDED_ERRCODE */
 
 /* Define to 1 if you have the <sqlite3.h> header file. */
-#define HAVE_SQLITE3_H 1
+/* #undef HAVE_SQLITE3_H */
 
 /* Define to 1 if you have the `sqlite3_prepare_v2' function. */
-#define HAVE_SQLITE3_PREPARE_V2 1
+/* #undef HAVE_SQLITE3_PREPARE_V2 */
 
 /* Define to 1 if you have the `srandom' function. */
 #define HAVE_SRANDOM 1
@@ -238,7 +238,7 @@
 #define HAVE_VFPRINTF 1
 
 /* Define to 1 if you have the <zlib.h> header file. */
-#define HAVE_ZLIB_H 1
+/* #undef HAVE_ZLIB_H */
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "dev@read-write.fr"
