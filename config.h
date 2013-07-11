@@ -17,7 +17,7 @@
 #define HAVE_CORESERVICES_CORESERVICES_H 1
 
 /* Define to 1 if you have the <curses.h> header file. */
-/* #undef HAVE_CURSES_H */
+#define HAVE_CURSES_H 1
 
 /* Define to 1 if you have the declaration of `optreset', and to 0 if you
    don't. */
@@ -51,7 +51,7 @@
 /* #undef HAVE_GLIBC */
 
 /* Define to 1 if you have the <iconv.h> header file. */
-/* #undef HAVE_ICONV_H */
+#define HAVE_ICONV_H 1
 
 /* Define to 1 if you have the <ifaddrs.h> header file. */
 #define HAVE_IFADDRS_H 1
@@ -66,7 +66,7 @@
 #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have the <libxml/parser.h> header file. */
-/* #undef HAVE_LIBXML_PARSER_H */
+#define HAVE_LIBXML_PARSER_H 1
 
 /* Define to 1 if you have the <machine/param.h> header file. */
 #define HAVE_MACHINE_PARAM_H 1
@@ -93,10 +93,10 @@
 #define HAVE_NXGETLOCALARCHINFO 1
 
 /* Define to 1 if you have the <openssl/sha.h> header file. */
-/* #undef HAVE_OPENSSL_SHA_H */
+#define HAVE_OPENSSL_SHA_H 1
 
 /* Define to 1 if you have the <openssl/ssl.h> header file. */
-/* #undef HAVE_OPENSSL_SSL_H */
+#define HAVE_OPENSSL_SSL_H 1
 
 /* Define to 1 if you have the <paths.h> header file. */
 #define HAVE_PATHS_H 1
@@ -105,7 +105,7 @@
 #define HAVE_PTHREAD_ATTR_SETSCHEDPOLICY 1
 
 /* Define to 1 if you have the <pthread.h> header file. */
-/* #undef HAVE_PTHREAD_H */
+#define HAVE_PTHREAD_H 1
 
 /* Define to 1 if the system has the type `ptrdiff_t'. */
 #define HAVE_PTRDIFF_T 1
@@ -123,13 +123,13 @@
 /* #undef HAVE_SETPROCTITLE */
 
 /* Define to 1 if you have the `sqlite3_extended_errcode' function. */
-/* #undef HAVE_SQLITE3_EXTENDED_ERRCODE */
+#define HAVE_SQLITE3_EXTENDED_ERRCODE 1
 
 /* Define to 1 if you have the <sqlite3.h> header file. */
-/* #undef HAVE_SQLITE3_H */
+#define HAVE_SQLITE3_H 1
 
 /* Define to 1 if you have the `sqlite3_prepare_v2' function. */
-/* #undef HAVE_SQLITE3_PREPARE_V2 */
+#define HAVE_SQLITE3_PREPARE_V2 1
 
 /* Define to 1 if you have the `srandom' function. */
 #define HAVE_SRANDOM 1
@@ -217,13 +217,13 @@
 #define HAVE_SYS_TYPES_H 1
 
 /* Define to 1 if you have the <termcap.h> header file. */
-/* #undef HAVE_TERMCAP_H */
+#define HAVE_TERMCAP_H 1
 
 /* Define to 1 if you have the <termios.h> header file. */
-/* #undef HAVE_TERMIOS_H */
+#define HAVE_TERMIOS_H 1
 
 /* Define to 1 if you have the <term.h> header file. */
-/* #undef HAVE_TERM_H */
+#define HAVE_TERM_H 1
 
 /* Define to 1 if you have the `timegm' function. */
 #define HAVE_TIMEGM 1
@@ -238,7 +238,7 @@
 #define HAVE_VFPRINTF 1
 
 /* Define to 1 if you have the <zlib.h> header file. */
-/* #undef HAVE_ZLIB_H */
+#define HAVE_ZLIB_H 1
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "dev@read-write.fr"

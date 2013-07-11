@@ -31,6 +31,7 @@ sub main {
 		{ name => "wired.info.os.name", content => $os_name },
 		{ name => "wired.info.os.version", content => $os_version },
 		{ name => "wired.info.arch", content => $arch },
+		{ name => "wired.info.supports_rsrc", content => "false"}
 	);
 	
 	my $message = p7readmessage($socket);
@@ -108,6 +109,8 @@ sub p7connect {
 			$specification .= $_;
 		}
 		close(FH);
+
+		print $specification;
 		
 		p7sendmessage($socket, "p7.compatibility_check.specification",
 			{ name => "p7.compatibility_check.specification", content => $specification },
@@ -139,6 +142,8 @@ sub p7sendmessage {
 	
 	my $xml = XMLout($tree, "RootName" => "p7:message", XMLDecl => "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 	
+	#print "$xml";
+
 	print $socket "$xml\r\n";
 }
 
@@ -158,12 +163,14 @@ sub p7readmessage {
 			last;
 		}
 	}
+
+	print $xml;
 	
 	if(!$message) {
 		die "No message received from server\n";
 	}
 	elsif($message->{"name"} eq "wired.error") {
-		die "Received Wired error $message->{'p7:field'}->{'content'}\n";
+		die "Received Wired error $message->{'p7:field'}->{'content'} $xml\n";
 	}
 	
 	return $message;
