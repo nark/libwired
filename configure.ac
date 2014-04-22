@@ -152,12 +152,12 @@ fi
 
 # Check for glibc (Linux)
 AC_MSG_CHECKING([for glibc])
-AC_COMPILE_IFELSE([
+AC_COMPILE_IFELSE([AC_LANG_SOURCE([
 	#include <features.h>
 	#ifndef __GLIBC__
 	chokeme
 	#endif
-], [
+])], [
 	AC_DEFINE([HAVE_GLIBC], [1], [Define to 1 if you have glibc.])
 	AC_DEFINE([_GNU_SOURCE], [1], [Define to 1 if you have glibc.])
 	AC_MSG_RESULT([yes])
