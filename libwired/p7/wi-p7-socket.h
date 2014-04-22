@@ -42,11 +42,13 @@
 	(((options) & WI_P7_ENCRYPTION_RSA_AES128_SHA1) ||		\
 	 ((options) & WI_P7_ENCRYPTION_RSA_AES192_SHA1) ||		\
 	 ((options) & WI_P7_ENCRYPTION_RSA_AES256_SHA1) ||		\
-	 ((options) & WI_P7_ENCRYPTION_RSA_BF128_SHA1) ||		\
-	 ((options) & WI_P7_ENCRYPTION_RSA_3DES192_SHA1))
+	 ((options) & WI_P7_ENCRYPTION_RSA_BF128_SHA1)  ||		\
+	 ((options) & WI_P7_ENCRYPTION_RSA_3DES192_SHA1) ||		\
+	 ((options) & WI_P7_ENCRYPTION_RSA_AES256_SHA256))			
 
 #define WI_P7_CHECKSUM_ENABLED(options)						\
-	(((options) & WI_P7_CHECKSUM_SHA1))
+	(((options) & WI_P7_CHECKSUM_SHA1)  || 					\
+	 ((options) & WI_P7_CHECKSUM_SHA256))
 
 
 enum _wi_p7_options {
@@ -56,14 +58,18 @@ enum _wi_p7_options {
 	WI_P7_ENCRYPTION_RSA_AES256_SHA1				= (1 << 3),
 	WI_P7_ENCRYPTION_RSA_BF128_SHA1					= (1 << 4),
 	WI_P7_ENCRYPTION_RSA_3DES192_SHA1				= (1 << 5),
-	WI_P7_CHECKSUM_SHA1								= (1 << 6),
+	WI_P7_ENCRYPTION_RSA_AES256_SHA256				= (1 << 6),
+	WI_P7_CHECKSUM_SHA1								= (1 << 7),
+	WI_P7_CHECKSUM_SHA256							= (1 << 8),
 	WI_P7_ALL										= (WI_P7_COMPRESSION_DEFLATE |
 													   WI_P7_ENCRYPTION_RSA_AES128_SHA1 |
 													   WI_P7_ENCRYPTION_RSA_AES192_SHA1 |
 													   WI_P7_ENCRYPTION_RSA_AES256_SHA1 |
 													   WI_P7_ENCRYPTION_RSA_BF128_SHA1 |
 													   WI_P7_ENCRYPTION_RSA_3DES192_SHA1 |
-													   WI_P7_CHECKSUM_SHA1)
+													   WI_P7_ENCRYPTION_RSA_AES256_SHA256 |
+													   WI_P7_CHECKSUM_SHA1 | 
+													   WI_P7_CHECKSUM_SHA256)
 };
 typedef enum _wi_p7_options							wi_p7_options_t;
 
