@@ -1274,11 +1274,6 @@ static wi_p7_message_t * _wi_p7_socket_read_binary_message(wi_p7_socket_t *p7_so
 	p7_message->binary_buffer = wi_malloc(p7_message->binary_capacity);
 	
 	length = wi_socket_read_buffer(p7_socket->socket, timeout, p7_message->binary_buffer, message_size);
-	
-	// for(int i = 0; i < 1024; i++) {
- //        printf("%02x", p7_message->binary_buffer[i]);
- //    }
- //    printf("\n\n");
 
 	if(length <= 0)
 		return NULL;
@@ -1289,8 +1284,6 @@ static wi_p7_message_t * _wi_p7_socket_read_binary_message(wi_p7_socket_t *p7_so
 
 #ifdef WI_RSA
 	if(p7_socket->encryption_enabled) {
-		//printf("wi_cipher_block_size: %d\n", (int)wi_cipher_block_size(p7_socket->cipher));
-
 		decrypted_size = p7_message->binary_size + wi_cipher_block_size(p7_socket->cipher);
 		
 		if(!p7_socket->decryption_buffer) {
@@ -1336,11 +1329,6 @@ static wi_p7_message_t * _wi_p7_socket_read_binary_message(wi_p7_socket_t *p7_so
 		
 		p7_message->binary_size = decompressed_size;
 	}
-
-    // for(int i = 0; i < 1024; i++) {
-    //     printf("%02x", p7_message->binary_buffer[i]);
-    // }
-    // printf("\n\n");
 	
 	p7_socket->read_processed_bytes += p7_message->binary_size;
 	
