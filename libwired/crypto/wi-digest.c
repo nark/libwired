@@ -449,7 +449,7 @@ wi_sha1_t * wi_sha1_alloc(void) {
 
 
 
-wi_sha1_t * wi_sha1_init(wi_sha1_t *sha1) {	
+wi_sha1_t * wi_sha1_init(wi_sha1_t *sha1) {
 	_wi_sha1_ctx_init(&sha1->ctx);
 	
 	return sha1;

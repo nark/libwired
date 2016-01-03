@@ -932,10 +932,6 @@ static wi_boolean_t _wi_p7_socket_accept_key_exchange(wi_p7_socket_t *p7_socket,
 			return false;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f8b996d09f0afc1034f13bd62819ed7487541660
 	p7_socket->cipher = wi_cipher_init_with_key(wi_cipher_alloc(), _WI_P7_ENCRYPTION_OPTIONS_TO_CIPHER(p7_socket->options), key, iv);
 
 	if(!p7_socket->cipher)
