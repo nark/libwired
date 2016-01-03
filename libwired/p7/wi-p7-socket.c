@@ -932,6 +932,10 @@ static wi_boolean_t _wi_p7_socket_accept_key_exchange(wi_p7_socket_t *p7_socket,
 			return false;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f8b996d09f0afc1034f13bd62819ed7487541660
 	p7_socket->cipher = wi_cipher_init_with_key(wi_cipher_alloc(), _WI_P7_ENCRYPTION_OPTIONS_TO_CIPHER(p7_socket->options), key, iv);
 
 	if(!p7_socket->cipher)
@@ -1273,11 +1277,6 @@ static wi_p7_message_t * _wi_p7_socket_read_binary_message(wi_p7_socket_t *p7_so
 	p7_message->binary_buffer = wi_malloc(p7_message->binary_capacity);
 	
 	length = wi_socket_read_buffer(p7_socket->socket, timeout, p7_message->binary_buffer, message_size);
-	
-	// for(int i = 0; i < 1024; i++) {
- //        printf("%02x", p7_message->binary_buffer[i]);
- //    }
- //    printf("\n\n");
 
 	if(length <= 0)
 		return NULL;
