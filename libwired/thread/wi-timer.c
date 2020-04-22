@@ -176,7 +176,7 @@ static void _wi_timer_thread(wi_runtime_instance_t *argument) {
 		wi_pool_drain(pool);
 	}
 
-	wi_release(pool);
+	//wi_release(pool);
 }
 
 
