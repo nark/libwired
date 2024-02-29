@@ -10,7 +10,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "libwired",
+            name: "libwired-osx",
             dependencies: [],
             path: "Sources/libwired"
         )
