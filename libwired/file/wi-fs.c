@@ -102,7 +102,7 @@ wi_string_t * wi_fs_temporary_path_with_template(wi_string_t *template) {
 	
 	wi_strlcpy(path, wi_string_cstring(template), sizeof(path));
 	
-	if(!mkstemp(path))
+	if(!mktemp(path))
 		return NULL;
 	
 	return wi_string_with_cstring(path);
