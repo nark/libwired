@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "libwired",
     products: [
-        .library(name: "libwired", targets: ["WiredFrameworks"]),
+        .library(name: "libwired-osx", targets: ["WiredFrameworks"]),
     ],
     dependencies: [
     ],
