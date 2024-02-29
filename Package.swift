@@ -4,11 +4,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "libwired-osx",
+    name: "libwired",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "libwired-osx",
+            name: "libwired",
             targets: ["WiredFrameworks"]),
     ],
     targets: [
