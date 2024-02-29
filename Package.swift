@@ -9,8 +9,9 @@ let package = Package(
     dependencies: [
     ],
     targets: [
-        .systemLibrary(
+        .target(
             name: "libwired",
+            dependencies: [],
             path: "Sources/libwired"
         )
     ]
