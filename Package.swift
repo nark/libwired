@@ -4,17 +4,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "libwired-osx2",
+    name: "libwired-osx",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "libwired-osx2",
-            targets: ["libwired-osx2"]),
+            name: "libwired",
+            targets: ["WiredFrameworks"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "libwired-osx2"),
+            name: "libwired-osx"),
     ]
 )
