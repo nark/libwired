@@ -1,5 +1,6 @@
 // swift-tools-version:5.3
 import PackageDescription
+
 let package = Package(
     name: "libwired",
     products: [
@@ -9,10 +10,7 @@ let package = Package(
     ],
     targets: [
         .systemLibrary(
-            name: "libwired",
-            ]
+            name: "libwired"
         )
     ]
 )
-
-
