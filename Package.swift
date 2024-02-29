@@ -10,7 +10,8 @@ let package = Package(
     ],
     targets: [
         .systemLibrary(
-            name: "libwired"
+            name: "libwired",
+            path: "Sources/libwired"
         )
     ]
 )
